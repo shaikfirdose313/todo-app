@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>To-Do List</h1>
+<form action="/add" method="POST">
+  <input type="text" name="task" placeholder="Enter task..." required>
+  <button type="submit">Add</button>
+</form>
+<ul>
+  {% for todo in todos %}
+    <li>
+      <span class="{{ 'completed' if todo['completed'] else '' }}">
+        {{ todo["task"] }}
+      </span>
+
+      <div>
+        <a href="/toggle/{{ todo['id'] }}">✔️</a>
+        <a href="/edit/{{ todo['id'] }}">✏️</a>
+        <a href="/delete/{{ todo['id'] }}">❌</a>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
